@@ -10,7 +10,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.net.URI;
 
 public class VirtualThreadCrawlerJdk21 {
 
@@ -83,7 +82,7 @@ public class VirtualThreadCrawlerJdk21 {
                 concurrencyLimit.acquire();
                 try {
                     //System.out.printf("[%s] Crawling: %s%n", Thread.currentThread(), url);
-                    List<PageLink> pageLinks = client.fetchAndExtractLinks(URI.create(url));
+                    List<PageLink> pageLinks = client.fetchAndExtractLinks(url);
                     allCollectedLinks.addAll(pageLinks);
 
                     for (PageLink link : pageLinks) {
