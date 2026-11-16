@@ -99,8 +99,9 @@ public class CrawlerHttpClient implements AutoCloseable {
                 .build();
     }
 
-    public List<PageLink> fetchAndExtractLinks(URI pageUri) {
+    public List<PageLink> fetchAndExtractLinks(String url) {
         try {
+			URI pageUri = URI.create(url);
             HttpRequest request = buildBrowserRequest(pageUri);
             HttpResponse<String> response = delegate.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -122,7 +123,7 @@ public class CrawlerHttpClient implements AutoCloseable {
                     .toList();
 
         } catch (Exception e) {
-            System.err.println("  Failed to fetch " + pageUri + ": " + e.getMessage());
+            System.err.println("  Failed to fetch " + url + ": " + e.getMessage());
             return List.of();
         }
     }
